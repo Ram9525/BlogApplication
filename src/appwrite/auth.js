@@ -33,6 +33,7 @@ export class Authservice {
             return await this.account.createEmailPasswordSession(email, password);
         } catch (error) {
             console.log("Appwrite Service :: login :: error", error);
+            throw error
         }
     }
 
