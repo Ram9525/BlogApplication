@@ -13,7 +13,7 @@ const Footer = () => {
           {/* Logo Section */}
           <div className="w-full md:w-1/3 flex justify-center md:justify-start">
             <Link to="/">
-              <Logo width="120px" className="transition-transform duration-300 hover:scale-110" />
+              <Logo width="60px" className="transition-transform duration-300 hover:scale-110" />
             </Link>
           </div>
 
