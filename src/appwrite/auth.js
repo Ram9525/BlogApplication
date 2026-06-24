@@ -25,7 +25,6 @@ export class Authservice {
             throw error;
 
         }
-
     }
 
     async login({email, password}){

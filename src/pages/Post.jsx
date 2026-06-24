@@ -35,32 +35,34 @@ export default function Post() {
     return post ? (
         <div className="py-8">
             <Container>
-                <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
-                    <img
-                        src={appwriteService.getFilePreview(post.featuredImage)}
-                        alt={post.title}
-                        className="rounded-xl"
-                    />
+                <div className="bg-gray-800 rounded-xl shadow-2xl overflow-hidden border border-gray-700">
+                    <div className="w-full relative">
+                        <img
+                            src={appwriteService.getFileView(post.featuredImage)}
+                            alt={post.title}
+                            className="w-full h-96 object-cover"
+                        />
 
-                    {isAuthor && (
-                        <div className="absolute right-6 top-6">
-                            <Link to={`/edit-post/${post.$id}`}>
-                                <Button bgColor="bg-green-500" className="mr-3">
-                                    Edit
+                        {isAuthor && (
+                            <div className="absolute right-6 top-6">
+                                <Link to={`/edit-post/${post.$id}`}>
+                                    <Button bgColor="bg-green-500" className="mr-3">
+                                        Edit
+                                    </Button>
+                                </Link>
+                                <Button bgColor="bg-red-500" onClick={deletePost}>
+                                    Delete
                                 </Button>
-                            </Link>
-                            <Button bgColor="bg-red-500" onClick={deletePost}>
-                                Delete
-                            </Button>
-                        </div>
-                    )}
-                </div>
-                <div className="w-full mb-6">
-                    <h1 className="text-2xl font-bold">{post.title}</h1>
-                </div>
-                <div className="browser-css">
-                    {parse(post.content)}
+                            </div>
+                        )}
                     </div>
+                    <div className="p-8">
+                        <h1 className="text-4xl font-bold mb-6 text-gray-100">{post.title}</h1>
+                        <div className="prose prose-invert max-w-none text-gray-300">
+                            {parse(post.content)}
+                        </div>
+                    </div>
+                </div>
             </Container>
         </div>
     ) : null;

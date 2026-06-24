@@ -22,19 +22,16 @@ function Home() {
     return (
         <div className="w-full py-8">
             <Container>
-                <div className="flex flex-wrap gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     {posts.length > 0 ? (
                         posts.map((post) => (
-                            <div 
-                                key={post.$id} 
-                                className="p-2 w-full sm:w-1/2 md:w-1/3 lg:w-1/4"
-                            >
+                            <div key={post.$id}>
                                 <PostCard {...post} />
                             </div>
                         ))
                     ) : (
-                        <div className="p-2 w-full text-center">
-                            <h1 className="text-2xl font-bold hover:text-gray-500">
+                        <div className="col-span-full text-center py-20">
+                            <h1 className="text-2xl font-bold text-gray-400 hover:text-gray-300">
                                 No posts yet, login to create
                             </h1>
                         </div>

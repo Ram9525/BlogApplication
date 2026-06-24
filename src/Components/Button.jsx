@@ -9,7 +9,7 @@ const Button = ({
     ...props
 }) => {
   return (
-   <button className={`px-4 py-2 rounded-lg ${className} ${bgColor} ${textColor}`} {...props}>
+   <button className={`px-4 py-2 rounded-lg ${className} ${bgColor} ${textColor} disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200`} {...props}>
         {children}
    </button>
   )

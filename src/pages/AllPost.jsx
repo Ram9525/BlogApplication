@@ -6,18 +6,18 @@ function AllPost() {
     useEffect(()=>{
         appwriteservice.getPosts([]).then(posts=>{
             if(posts){
-                // console.log(posts);
                 setPosts(posts.documents)
             }
         })
     },[])
-    //always spread the props in react components if they are accepting destructured props
+
   return (
-    <div>
+    <div className='w-full py-8'>
         <Container>
-        <div className='flex flex-wrap lg:flex-wrap gap-4 py-3'>
+            <h1 className='text-3xl font-bold mb-8 text-gray-100'>All Posts</h1>
+            <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
                 {posts.map((post) => (
-                    <div key={post.$id} className='w-[400px]'>
+                    <div key={post.$id}>
                         <PostCard {...post} /> 
                     </div>
                 ))}

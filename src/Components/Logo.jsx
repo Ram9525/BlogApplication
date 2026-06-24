@@ -1,9 +1,10 @@
 import React from 'react'
+import { Feather } from 'lucide-react'
 
-const Logo = ({width='100px'}) => {
+const Logo = ({width='50px'}) => {
   return (
-    <div>
-      <img src="https://t3.ftcdn.net/jpg/07/16/67/38/360_F_716673828_Ax9czEr2UY31dh14J6duuVXEtTeAiS1C.jpg" alt="logo" width={`${width}`} />
+    <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-xl shadow-lg transform transition-transform hover:scale-110 hover:rotate-3">
+      <Feather className="text-white" size={24} />
     </div>
   )
 }

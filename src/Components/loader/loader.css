@@ -1,26 +1,46 @@
 /* HTML: <div class="loader"></div> */
 .loader {
-        width: 20px;
-        aspect-ratio: 1;
-        animation: l13-0 2s linear infinite;
-        z-index: 10;
-        position: relative;
-      }
-      .loader::before,
-      .loader::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        border-radius: 50%;
-        background: radial-gradient(at 30% 30%,#0000,#000a) red;
-        animation: l13-1 0.5s cubic-bezier(.5,-500,.5,500) infinite;
-      }
-      .loader::after {
-        animation-delay: -0.15s;
-      }
-      @keyframes l13-0 { 
-        100% { transform:rotate(360deg)} 
-      }
-      @keyframes l13-1 { 
-        100% { transform:translate(0.5px)} 
-      }
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  position: relative;
+  animation: rotate 1s linear infinite;
+  z-index: 10;
+}
+
+.loader::before,
+.loader::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+}
+
+.loader::before {
+  inset: 0;
+  border: 3px solid transparent;
+  border-top-color: #3b82f6;
+  animation: spin 1s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+
+.loader::after {
+  inset: 6px;
+  border: 3px solid transparent;
+  border-top-color: #8b5cf6;
+  animation: spin 0.75s cubic-bezier(0.5, 0, 0.5, 1) infinite reverse;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

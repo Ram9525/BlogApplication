@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Container, Logo, LogoutBtn } from "../index";
 import { useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Home, PenTool, BookOpen, LogIn, UserPlus } from "lucide-react";
 
 const Header = () => {
   const authStatus = useSelector((state) => state.auth.status);
@@ -10,53 +10,86 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
-    { name: "Home", slug: "/", active: true },
-    { name: "Login", slug: "/login", active: !authStatus },
-    { name: "Signup", slug: "/signup", active: !authStatus },
-    { name: "All Posts", slug: "/all-posts", active: authStatus },
-    { name: "Add Post", slug: "/add-post", active: authStatus },
+    { name: "Home", slug: "/", active: true, icon: Home },
+    { name: "Login", slug: "/login", active: !authStatus, icon: LogIn },
+    { name: "Signup", slug: "/signup", active: !authStatus, icon: UserPlus },
+    { name: "All Posts", slug: "/all-posts", active: authStatus, icon: BookOpen },
+    { name: "Add Post", slug: "/add-post", active: authStatus, icon: PenTool },
   ];
 
   return (
-    <header className="bg-gradient-to-r from-blue-600 to-indigo-700 py-4 shadow-lg">
+    <header className="sticky top-0 z-50 backdrop-blur-lg bg-gray-900/95 border-b border-gray-800 shadow-xl">
       <Container>
-        <nav className="flex items-center justify-between">
+        <nav className="flex items-center justify-between py-4">
           {/* Logo */}
-          <Link to="/">
-            <Logo width="70px" className="transition-transform duration-300 hover:scale-110" />
+          <Link to="/" className="flex items-center gap-3 group">
+            <Logo width="50px" />
+            <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent hidden sm:block">
+              MegaBlog
+            </span>
           </Link>
 
-          {/* Mobile Menu Button */}
-          <button className="md:hidden text-white" onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
-
-          {/* Navigation */}
-          <ul className={`absolute md:static top-16 left-0 w-full bg-blue-600 md:bg-transparent p-5 md:p-0 space-y-4 md:space-y-0 flex flex-col md:flex-row md:items-center md:space-x-6 transition-all duration-300 items-center justify-center gap-4 z-50 ${isOpen ? "flex" : "hidden"} md:flex`}>
+          {/* Desktop Navigation */}
+          <ul className="hidden md:flex items-center gap-2">
             {navItems.map(
               (item) =>
                 item.active && (
                   <li key={item.name}>
                     <button
-                      onClick={() => {
-                        navigate(item.slug);
-                        setIsOpen(false);
-                      }}
-                      className="block px-5 py-2 text-white text-center font-semibold rounded-lg transition-all duration-300 hover:bg-white hover:text-blue-600 cursor-pointer"
+                      onClick={() => navigate(item.slug)}
+                      className="flex items-center gap-2 px-4 py-2 text-gray-300 font-medium rounded-lg transition-all duration-200 hover:bg-gray-800 hover:text-blue-400 cursor-pointer"
                     >
+                      <item.icon size={18} />
                       {item.name}
                     </button>
                   </li>
                 )
             )}
-            {/* Logout Button */}
             {authStatus && (
               <li>
                 <LogoutBtn />
               </li>
             )}
           </ul>
+
+          {/* Mobile Menu Button */}
+          <button 
+            className="md:hidden p-2 rounded-lg hover:bg-gray-800 transition-colors" 
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            {isOpen ? <X size={24} className="text-gray-300" /> : <Menu size={24} className="text-gray-300" />}
+          </button>
         </nav>
+
+        {/* Mobile Navigation */}
+        {isOpen && (
+          <div className="md:hidden pb-4 animate-in slide-in-from-top duration-200">
+            <ul className="flex flex-col gap-2">
+              {navItems.map(
+                (item) =>
+                  item.active && (
+                    <li key={item.name}>
+                      <button
+                        onClick={() => {
+                          navigate(item.slug);
+                          setIsOpen(false);
+                        }}
+                        className="flex items-center gap-3 w-full px-4 py-3 text-gray-300 font-medium rounded-lg transition-all duration-200 hover:bg-gray-800 hover:text-blue-400 cursor-pointer"
+                      >
+                        <item.icon size={20} />
+                        {item.name}
+                      </button>
+                    </li>
+                  )
+              )}
+              {authStatus && (
+                <li className="pt-2 border-t border-gray-800">
+                  <LogoutBtn />
+                </li>
+              )}
+            </ul>
+          </div>
+        )}
       </Container>
     </header>
   );

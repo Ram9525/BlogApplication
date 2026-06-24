@@ -23,7 +23,7 @@ function App() {
   }, []);
 
   return (
-    <div className='min-h-screen bg-gray-400 flex flex-wrap content-between'>
+    <div className='min-h-screen bg-gray-900 flex flex-wrap content-between'>
       <div className='w-full block'>
         <Header />
         <main>
